@@ -1,0 +1,88 @@
+:root{
+  --bg: #111216;
+  --panel: #17171a;
+  --text: #e6eef8;
+  --muted: #9fa6b0;
+  --accent: #6fd3c6;
+  --container: 1000px;
+  font-family: "Noto Sans SC", "PingFang SC", "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#0b0c0e 0%, var(--bg) 100%);
+  color:var(--text);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* 容器 */
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:28px;
+}
+
+/* 头部简历行 */
+.resume-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  padding-bottom:20px;
+}
+.resume-header .left{flex:1}
+.resume-header .right{width:140px;flex-shrink:0;text-align:right}
+.photo{
+  width:120px;
+  height:140px;
+  object-fit:cover;
+  border-radius:8px;
+  border:2px solid rgba(255,255,255,0.06);
+}
+
+/* 名称与元信息 */
+.name{margin:0;font-size:28px;letter-spacing:1px}
+.meta{margin-top:8px;color:var(--muted);display:flex;flex-direction:column;gap:6px;font-size:14px}
+
+/* 主体布局 */
+.resume-body{padding-top:18px}
+.section{margin-bottom:20px}
+.section h2{
+  margin:0 0 10px 0;
+  font-size:18px;
+  color:var(--text);
+  border-left:4px solid var(--accent);
+  padding-left:10px;
+}
+
+/* 工作经历 */
+.job{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+.job-header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.job h3{margin:0;font-size:16px}
+.job time{color:var(--muted);font-size:13px}
+
+/* 列表样式 */
+ul{margin:8px 0 0 1rem;padding:0}
+ul li{margin:6px 0;color:var(--muted);font-size:14px}
+
+/* 技能 */
+.skills-list li{margin:8px 0;color:var(--muted)}
+
+/* 教育 */
+.edu-time{color:var(--muted);margin-top:6px}
+
+/* 页脚 */
+.site-footer{Padding:18px 0;border-top:1px solid rgba(255,255,255,0.02);text-align:center;color:var(--muted);font-size:13px}
+
+/* 响应式 */
+@media (max-width:720px){
+  .resume-header{flex-direction:row;align-items:center}
+  .resume-header .right{text-align:left;width:96px}
+  .photo{width:96px;height:120px}
+  .container{padding:16px}
+}
