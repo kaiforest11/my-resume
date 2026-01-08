@@ -20,6 +20,11 @@
     </div>
     <div class="right">
       <img src="微信图片_20260102144604_92_52.png" alt="头像" class="photo" />
+      <div class="download-actions">
+        <button id="printBtn" class="download-btn">打印 / 保存为 PDF</button>
+        <a id="downloadPdf" class="download-btn download-pdf download-link" href="resume.pdf" download="贾虎林_简历.pdf" title="下载 PDF 简历">下载 PDF</a>
+        <a id="downloadHtml" class="download-btn download-link" href="index.html" download="贾虎林_简历.html">下载 HTML</a>
+      </div>
     </div>
   </header>
 
@@ -27,7 +32,7 @@
     <section class="section about">
       <h2>个人简介</h2>
       <p>
-        擅长服务器管理、网络安全配置、IT 基础设施维护及自动化工具使用。具备出色的故障排查能力及团队协作精神。现有副业：自媒体和电商售卖（可根据公司需求商议）。
+        擅长服务器管理、网络安全配置、IT 基础设施维护及自动化工具使用。具备出色的故障排查能力及团队协作精神。现有副业：自媒体和电商售��[...]
       </p>
     </section>
 
@@ -41,7 +46,7 @@
         </div>
         <h4>主要职责</h4>
         <ul>
-          <li>负责公司区域机房网络运维工作，IDC 管理；熟悉企业网络架构、核心网络设备、防火墙等配置；管理核心网络设备资产并定期配置备份、维护。</li>
+          <li>负责公司区域机房网络运维工作，IDC 管理；熟悉企业网络架构、核心网络设备、防火墙等配置；管理核心网络设备资产并定期配置备份、�[...]
           <li>协助网络同事处理公司业务网络问题，防火墙策略开通、部门网络故障分析。</li>
           <li>负责公司 WLAN 无线网络运维，AC 业务配置、AP 控制、信道调优。</li>
           <li>负责 VPN 账号管理工作，熟悉深信服、H3C 防火墙等设备；VPN 用户管理及资源权限分配操作。</li>
@@ -70,7 +75,7 @@
     <section class="section skills">
       <h2>技能</h2>
       <ul class="skills-list">
-        <li><strong>服务器管理：</strong>邮件服务器、AD、备份服务器、文件服务器、Web 服务器、数据库服务器、虚拟化服务器、应用服务器、DNS、DHCP、各类安全服务。</li>
+        <li><strong>服务器管理：</strong>邮件服务器、AD、备份服务器、文件服务器、Web 服务器、数据库服务器、虚拟化服务器、应用服务器、DNS、DHCP、�[...]
         <li><strong>网络管理：</strong>交换机、路由器配置与维护，IDC 标准化管理，防火墙、VPN、WLAN 配置与优化。</li>
         <li><strong>操作系统：</strong>Windows、macOS、Linux 问题排查与维护。</li>
         <li><strong>硬件维护：</strong>主板、电源、显示器等常见硬件故障处理。</li>
@@ -91,7 +96,68 @@
   </footer>
 
   <script>
+    // 年份
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 打印 / 保存为 PDF
+    document.getElementById('printBtn').addEventListener('click', function () {
+      // 在大多数浏览器中，window.print() 会打开打印对话框，用户可以选择"另存为 PDF"
+      window.print();
+    });
+
+    // 下载 PDF（尝试 fetch，兼容性更好；如果服务器上已有 resume.pdf，a.download 也可工作）
+    document.getElementById('downloadPdf').addEventListener('click', function (e) {
+      // 如果浏览器 支持 download 并且服务器直接提供 PDF，a 标签会处理下载。这里我们拦截以便在 SPA 或相对路径场景中也能生效。
+      // 仅在 href 可用时尝试 fetch
+      e.preventDefault();
+      var href = this.getAttribute('href');
+      var filename = this.getAttribute('download') || 'resume.pdf';
+
+      if (!href) {
+        return;
+      }
+
+      fetch(href).then(function (resp) {
+        if (!resp.ok) throw new Error('network');
+        return resp.blob();
+      }).then(function (blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }).catch(function () {
+        // 回退：直接导航到资源（服务器可以设置 Content-Disposition: attachment）或使用现有链接
+        window.location.href = href;
+      });
+    });
+
+    // 下载 HTML（使用 download 属性，直接下载当前 index.html 文件副本）
+    // 备用方式：如果浏览器不支持直接下载，可以通过 fetch 创建 blob 并触发下载
+    document.getElementById('downloadHtml').addEventListener('click', function (e) {
+      // 尝试使用 fetch 获取当前页面的 HTML 并触发下载，提升兼容性
+      e.preventDefault();
+      fetch(window.location.href)
+        .then(function (resp) { return resp.text(); })
+        .then(function (text) {
+          var blob = new Blob([text], { type: 'text/html;charset=utf-8' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = '贾虎林_简历.html';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+        })
+        .catch(function () {
+          // 如果 fetch 失败，回退到直接下载链接
+          window.location.href = 'index.html';
+        });
+    });
   </script>
 </body>
 </html>
