@@ -79,10 +79,47 @@ ul li{margin:6px 0;color:var(--muted);font-size:14px}
 /* 页脚 */
 .site-footer{Padding:18px 0;border-top:1px solid rgba(255,255,255,0.02);text-align:center;color:var(--muted);font-size:13px}
 
-/* 响应式 */
+/* 下载按钮样式 */
+.download-actions{
+  margin-top:10px;
+  display:flex;
+  flex-direction:row;
+  justify-content:flex-end;
+  gap:8px;
+  align-items:center;
+}
+
+.download-btn,
+.download-link{
+  display:inline-block;
+  padding:6px 10px;
+  background:rgba(111,211,198,0.08);
+  color:var(--accent);
+  border:1px solid rgba(111,211,198,0.16);
+  border-radius:6px;
+  text-decoration:none;
+  font-size:13px;
+  cursor:pointer;
+  transition:all .12s ease;
+}
+
+.download-btn:hover,
+.download-link:hover{
+  background:rgba(111,211,198,0.14);
+  transform:translateY(-1px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.28);
+}
+
+.download-btn:active{transform:translateY(0)}
+
+.download-pdf{
+  background:linear-gradient(180deg, rgba(111,211,198,0.14), rgba(111,211,198,0.06));
+  color:#042826;
+  border-color:rgba(111,211,198,0.26);
+}
+
 @media (max-width:720px){
-  .resume-header{flex-direction:row;align-items:center}
-  .resume-header .right{text-align:left;width:96px}
-  .photo{width:96px;height:120px}
-  .container{padding:16px}
+  .resume-header{flex-direction:column;align-items:center}
+  .resume-header .right{text-align:center;width:auto;margin-top:12px}
+  .download-actions{justify-content:center;flex-wrap:wrap}
 }
