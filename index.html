@@ -1,163 +1,430 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>贾虎林 — 简历</title>
-  <meta name="description" content="贾虎林 的个人简历 / 运维工程师" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贾虎林_运维工程师_简历</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #006AFF;
+            --primary-light: #E6F0FF;
+            --text-dark: #1F2329;
+            --text-light: #646A73;
+            --text-lighter: #8D949E;
+            --border: #E4E7EB;
+            --bg-sidebar: #F9FAFB;
+            --shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 基础重置 */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            background-color: #F5F7FA;
+            font-family: 'Roboto', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        /* A4 纸张容器 */
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            display: flex;
+            box-shadow: var(--shadow);
+            position: relative;
+            font-size: 14px;
+        }
+
+        /* 打印按钮 - 悬浮在右上角 */
+        .print-fab {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 106, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+        .print-fab:hover { 
+            background: #005CE6; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(0, 106, 255, 0.4);
+        }
+
+        /* 左侧边栏 */
+        .sidebar {
+            width: 33%;
+            background-color: var(--bg-sidebar);
+            padding: 40px 30px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-box {
+            width: 140px; /* 35mm */
+            height: 180px; /* 45mm */
+            background: #e0e0e0;
+            margin: 0 auto 25px;
+            border-radius: 8px;
+            border: 2px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 12px;
+        }
+        .photo-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .name { 
+            font-size: 26px; 
+            font-weight: 700; 
+            color: var(--text-dark); 
+            text-align: center; 
+            margin-bottom: 8px; 
+            line-height: 1.2;
+        }
+        .title-sub { 
+            font-size: 14px; 
+            color: var(--primary-color); 
+            text-align: center; 
+            font-weight: 500; 
+            letter-spacing: 0.5px; 
+            margin-bottom: 30px; 
+        }
+
+        .contact-group { 
+            margin-bottom: 35px; 
+        }
+        .info-row { 
+            font-size: 13px; 
+            color: var(--text-light); 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .info-row strong { 
+            color: var(--text-dark); 
+            width: 40px; 
+            min-width: 40px;
+        }
+
+        .skill-header { 
+            font-size: 12px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            color: var(--text-lighter); 
+            margin: 20px 0 12px; 
+            border-top: 1px solid var(--border); 
+            padding-top: 15px; 
+        }
+        .tag-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px; 
+        }
+        .skill-tag { 
+            font-family: 'Roboto Mono', monospace; 
+            font-size: 11px; 
+            background: white; 
+            border: 1px solid var(--border); 
+            padding: 4px 10px; 
+            border-radius: 16px; 
+            color: var(--text-light);
+            transition: all 0.2s;
+        }
+        .skill-tag:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* 右侧主内容 */
+        .main-content {
+            flex: 1;
+            padding: 50px 45px;
+        }
+
+        .profile-summary {
+            background: var(--primary-light);
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-header::after { 
+            content: ""; 
+            flex: 1; 
+            height: 1px; 
+            background: var(--border); 
+        }
+
+        .item { 
+            margin-bottom: 28px; 
+        }
+        .item-head { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: baseline; 
+            margin-bottom: 8px; 
+        }
+        .item-org { 
+            font-size: 16px; 
+            font-weight: 700; 
+            color: var(--text-dark); 
+        }
+        .item-time { 
+            font-family: 'Roboto Mono', monospace; 
+            font-size: 12px; 
+            color: var(--primary-color); 
+        }
+        .item-role { 
+            font-size: 14px; 
+            font-weight: 500; 
+            color: var(--text-light); 
+            margin-bottom: 10px; 
+        }
+
+        .bullet-points { 
+            list-style: none; 
+            padding-left: 5px; 
+        }
+        .bullet-points li { 
+            font-size: 13px; 
+            color: var(--text-light); 
+            margin-bottom: 9px; 
+            position: relative; 
+            padding-left: 18px; 
+        }
+        .bullet-points li::before { 
+            content: "•"; 
+            position: absolute; 
+            left: 0; 
+            color: var(--primary-color); 
+            font-weight: bold;
+            font-size: 18px;
+            top: 0;
+            line-height: 1.2;
+        }
+
+        /* 打印专用 CSS 覆盖 */
+        @media print {
+            body { 
+                background: white; 
+                padding: 0; 
+                font-size: 12pt;
+                line-height: 1.5;
+            }
+            
+            .print-fab { 
+                display: none; 
+            }
+            
+            .a4-page { 
+                width: 100%; 
+                height: auto; 
+                box-shadow: none; 
+                margin: 0;
+                font-size: 11pt;
+            }
+            
+            .sidebar { 
+                background-color: white !important; 
+                -webkit-print-color-adjust: exact; 
+                color: #000000;
+            }
+            
+            .skill-tag { 
+                border: 1px solid #000000 !important; 
+                color: #000000 !important;
+                background: white !important;
+            }
+            
+            .name {
+                color: #000000 !important;
+            }
+            
+            .title-sub {
+                color: #000000 !important;
+            }
+            
+            .info-row {
+                color: #000000 !important;
+            }
+            
+            .info-row strong {
+                color: #000000 !important;
+            }
+            
+            .profile-summary {
+                background: white !important;
+                color: #000000 !important;
+                border-left: 3px solid #000000 !important;
+            }
+            
+            .section-header {
+                color: #000000 !important;
+            }
+            
+            .item-org {
+                color: #000000 !important;
+            }
+            
+            .item-time {
+                color: #000000 !important;
+            }
+            
+            .item-role {
+                color: #000000 !important;
+            }
+            
+            .bullet-points li {
+                color: #000000 !important;
+            }
+            
+            .bullet-points li::before {
+                color: #000000 !important;
+            }
+            
+            .text-light {
+                color: #000000 !important;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        @media screen {
+            .page-break {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="resume-header container">
-    <div class="left">
-      <h1 class="name">贾虎林</h1>
-      <div class="meta">
-        <span>China · 男 · 24岁</span>
-        <span>电话：+86 19130699636</span>
-        <span>工作经验：3 年</span>
-      </div>
+
+    <button class="print-fab" onclick="window.print()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 8H5C3.34 8 2 9.34 2 11V17H6V21H18V17H22V11C22 9.34 20.66 8 19 8ZM16 19H8V14H16V19ZM19 12C18.45 12 18 11.55 18 11C18 10.45 18.45 10 19 10C19.55 10 20 10.45 20 11C20 11.55 19.55 12 19 12ZM18 3H6V7H18V3Z" fill="currentColor"/>
+        </svg>
+        打印简历 / 导出 PDF
+    </button>
+
+    <div class="a4-page">
+        <aside class="sidebar">
+            <div class="photo-box">
+                <img src="your-photo.jpg" alt="贾虎林">
+            </div>
+            <h1 class="name">贾虎林</h1>
+            <div class="title-sub">运维工程师 / IT OPERATIONS</div>
+
+            <div class="contact-group">
+                <div class="info-row"><strong>电话</strong> +86 19130699636</div>
+                <div class="info-row"><strong>经验</strong> 3年相关经验</div>
+                <div class="info-row"><strong>城市</strong> 中国</div>
+            </div>
+
+            <div class="skill-header">核心技能栈</div>
+            <div class="tag-container">
+                <span class="skill-tag">Linux/macOS</span>
+                <span class="skill-tag">Python Scripting</span>
+                <span class="skill-tag">Ansible/Puppet</span>
+                <span class="skill-tag">VMware/KVM</span>
+                <span class="skill-tag">H3C/深信服</span>
+                <span class="skill-tag">SQL Server</span>
+                <span class="skill-tag">MySQL/Access</span>
+                <span class="skill-tag">VPN/Firewall</span>
+                <span class="skill-tag">IDC标准化</span>
+                <span class="skill-tag">灾备策略</span>
+            </div>
+
+            <div class="skill-header">教育背景</div>
+            <div style="font-size: 13px; color: var(--text-dark); font-weight: 700;">南充职业技术学院</div>
+            <div style="font-size: 12px; color: var(--text-light);">电子信息工程 · 大专</div>
+            <div style="font-size: 11px; color: var(--primary-color); font-family: monospace; margin-top: 4px;">2019.09 - 2022.06</div>
+        </aside>
+
+        <main class="main-content">
+            <section class="profile-summary">
+                擅长服务器管理、网络安全配置、IT基础设施维护及自动化工具使用。具备出色的故障排查能力及团队合作精神。现有副业（自媒体/电商）可根据业务需求转化为公司数字化运营助力。
+            </section>
+
+            <h2 class="section-header">工作经历</h2>
+            <div class="item">
+                <div class="item-head">
+                    <span class="item-org">苏州聚力电机有限公司</span>
+                    <span class="item-time">2021.08 - 2024.09</span>
+                </div>
+                <div class="item-role">运维工程师</div>
+                <ul class="bullet-points">
+                    <li>统筹机房网络运维与 IDC 管理，负责核心网络设备、防火墙配置及自动化备份。</li>
+                    <li>负责 WLAN 无线网络部署，涵盖 AC 业务配置、AP 控制及信道调优。</li>
+                    <li>管理 VPN 账户权限及资源分配（深信服、H3C等），确保远程接入安全。</li>
+                    <li>负责私有云 VM 虚拟机生命周期管理及内网服务器 NAT-Server 策略维护。</li>
+                    <li>执行公司灾备项目，制定并维护备份策略，确保业务连续性。</li>
+                </ul>
+            </div>
+
+            <h2 class="section-header">项目经验</h2>
+            <div class="item">
+                <div class="item-head">
+                    <span class="item-org">公司线路工程项目</span>
+                    <span class="item-time">2022.10 - 2022.12</span>
+                </div>
+                <div class="item-role">项目负责人 (Owner)</div>
+                <ul class="bullet-points">
+                    <li><strong>独立决策</strong>：主导 IDC 机房线路维护的需求制定与流程发起。</li>
+                    <li><strong>采购管理</strong>：负责供应商筛选、招标采购及极具竞争力的价格谈判。</li>
+                    <li><strong>质量交付</strong>：全程监督现场勘查与实施，出具检查报告并完成验收。</li>
+                </ul>
+            </div>
+
+            <h2 class="section-header">技术专长</h2>
+            <div class="item">
+                <ul class="bullet-points">
+                    <li><strong>服务器生态</strong>：熟悉 AD、Web、数据库、虚拟化、应用程序及 DNS/DHCP 各类服务器。</li>
+                    <li><strong>硬件运维</strong>：精通主板、电源、显示器等硬件故障诊断与维护。</li>
+                    <li><strong>跨平台支持</strong>：提供 Windows, macOS, Linux 全平台的终端及系统级支持。</li>
+                </ul>
+            </div>
+        </main>
     </div>
-    <div class="right">
-      <img src="微信图片_20260102144604_92_52.png" alt="头像" class="photo" />
-      <div class="download-actions">
-        <button id="printBtn" class="download-btn">打印 / 保存为 PDF</button>
-        <a id="downloadPdf" class="download-btn download-pdf download-link" href="resume.pdf" download="贾虎林_简历.pdf" title="下载 PDF 简历">下载 PDF</a>
-        <a id="downloadHtml" class="download-btn download-link" href="index.html" download="贾虎林_简历.html">下载 HTML</a>
-      </div>
-    </div>
-  </header>
 
-  <main class="container resume-body">
-    <section class="section about">
-      <h2>个人简介</h2>
-      <p>
-        擅长服务器管理、网络安全配置、IT 基础设施维护及自动化工具使用。具备出色的故障排查能力及团队协作精神。现有副业：自媒体和电商售��[...]
-      </p>
-    </section>
-
-    <section class="section experience">
-      <h2>工作经历</h2>
-
-      <article class="job">
-        <div class="job-header">
-          <h3>运维工程师 · 苏州聚力电机有限公司</h3>
-          <time>2021.08 — 2024.09</time>
-        </div>
-        <h4>主要职责</h4>
-        <ul>
-          <li>负责公司区域机房网络运维工作，IDC 管理；熟悉企业网络架构、核心网络设备、防火墙等配置；管理核心网络设备资产并定期配置备份、�[...]
-          <li>协助网络同事处理公司业务网络问题，防火墙策略开通、部门网络故障分析。</li>
-          <li>负责公司 WLAN 无线网络运维，AC 业务配置、AP 控制、信道调优。</li>
-          <li>负责 VPN 账号管理工作，熟悉深信服、H3C 防火墙等设备；VPN 用户管理及资源权限分配操作。</li>
-          <li>负责公司灾备项目业务，维护灾备设备备份策略，日常灾备情况运维。</li>
-          <li>负责公司私有云服务器管理工作，负责 VM 虚拟机开通及管理；负责内网服务器、NAT-Server 策略配置及管理。</li>
-          <li>负责公司终端运维，解决系统常见问题，包含公司网络、IP 电话、电脑系统、打印机驱动等问题。</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="section projects">
-      <h2>项目经历</h2>
-
-      <article class="project">
-        <h3>公司线路工程项目</h3>
-        <time>[2022.10 — 2022.12]</time>
-        <ul>
-          <li>提出需求并推进公司流程发起 IDC 机房线路维护申请，负责供应商选择与招标采购。</li>
-          <li>陪同供应商进行现场勘查，并明确维护标准。</li>
-          <li>进行价格谈判，确保以最优价格签订维护合同；协助供应商完成维护工作。</li>
-          <li>对维护结果进行检查，并出检查报告确认符合公司要求；完成验收并启动付款流程。</li>
-        </ul>
-      </article>
-    </section>
-
-    <section class="section skills">
-      <h2>技能</h2>
-      <ul class="skills-list">
-        <li><strong>服务器管理：</strong>邮件服务器、AD、备份服务器、文件服务器、Web 服务器、数据库服务器、虚拟化服务器、应用服务器、DNS、DHCP、�[...]
-        <li><strong>网络管理：</strong>交换机、路由器配置与维护，IDC 标准化管理，防火墙、VPN、WLAN 配置与优化。</li>
-        <li><strong>操作系统：</strong>Windows、macOS、Linux 问题排查与维护。</li>
-        <li><strong>硬件维护：</strong>主板、电源、显示器等常见硬件故障处理。</li>
-        <li><strong>数据库与脚本：</strong>SQL Server、MySQL、Access；脚本语言与自动化：Python。</li>
-        <li><strong>自动化工具：</strong>Ansible、Puppet。</li>
-      </ul>
-    </section>
-
-    <section class="section education">
-      <h2>教育经历</h2>
-      <p>南充职业技术学院 · 大专 · 电子信息工程（电子专业）</p>
-      <p class="edu-time">时间：2019.09 — 2022.06</p>
-    </section>
-  </main>
-
-  <footer class="site-footer container">
-    <p>© <span id="year"></span> </p>
-  </footer>
-
-  <script>
-    // 年份
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 打印 / 保存为 PDF
-    document.getElementById('printBtn').addEventListener('click', function () {
-      // 在大多数浏览器中，window.print() 会打开打印对话框，用户可以选择"另存为 PDF"
-      window.print();
-    });
-
-    // 下载 PDF（尝试 fetch，兼容性更好；如果服务器上已有 resume.pdf，a.download 也可工作）
-    document.getElementById('downloadPdf').addEventListener('click', function (e) {
-      // 如果浏览器 支持 download 并且服务器直接提供 PDF，a 标签会处理下载。这里我们拦截以便在 SPA 或相对路径场景中也能生效。
-      // 仅在 href 可用时尝试 fetch
-      e.preventDefault();
-      var href = this.getAttribute('href');
-      var filename = this.getAttribute('download') || 'resume.pdf';
-
-      if (!href) {
-        return;
-      }
-
-      fetch(href).then(function (resp) {
-        if (!resp.ok) throw new Error('network');
-        return resp.blob();
-      }).then(function (blob) {
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      }).catch(function () {
-        // 回退：直接导航到资源（服务器可以设置 Content-Disposition: attachment）或使用现有链接
-        window.location.href = href;
-      });
-    });
-
-    // 下载 HTML（使用 download 属性，直接下载当前 index.html 文件副本）
-    // 备用方式：如果浏览器不支持直接下载，可以通过 fetch 创建 blob 并触发下载
-    document.getElementById('downloadHtml').addEventListener('click', function (e) {
-      // 尝试使用 fetch 获取当前页面的 HTML 并触发下载，提升兼容性
-      e.preventDefault();
-      fetch(window.location.href)
-        .then(function (resp) { return resp.text(); })
-        .then(function (text) {
-          var blob = new Blob([text], { type: 'text/html;charset=utf-8' });
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = '贾虎林_简历.html';
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
-        })
-        .catch(function () {
-          // 如果 fetch 失败，回退到直接下载链接
-          window.location.href = 'index.html';
-        });
-    });
-  </script>
 </body>
 </html>
