@@ -1,125 +1,104 @@
-:root{
-  --bg: #111216;
-  --panel: #17171a;
-  --text: #e6eef8;
-  --muted: #9fa6b0;
-  --accent: #6fd3c6;
-  --container: 1000px;
-  font-family: "Noto Sans SC", "PingFang SC", "Segoe UI", Roboto, Arial, sans-serif;
+:root {
+    --google-blue: #4285F4;
+    --text-dark: #202124;
+    --text-light: #5f6368;
+    --border: #dadce0;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:linear-gradient(180deg,#0b0c0e 0%, var(--bg) 100%);
-  color:var(--text);
-  line-height:1.7;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+/* 基础样式 */
+body {
+    background: #e8eaed; /* 网页预览时的背景色 */
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
 }
 
-/* 容器 */
-.container{
-  max-width:var(--container);
-  margin:0 auto;
-  padding:28px;
+/* A4 纸张模拟 */
+.resume-container {
+    width: 210mm; /* A4 标准宽度 */
+    min-height: 297mm; /* A4 标准高度 */
+    background: white;
+    display: flex;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 
-/* 头部简历行 */
-.resume-header{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:20px;
-  border-bottom:1px solid rgba(255,255,255,0.04);
-  padding-bottom:20px;
+/* 打印按钮 */
+.print-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background: var(--google-blue);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+    z-index: 100;
 }
-.resume-header .left{flex:1}
-.resume-header .right{width:140px;flex-shrink:0;text-align:right}
-.photo{
-  width:120px;
-  height:140px;
-  object-fit:cover;
-  border-radius:8px;
-  border:2px solid rgba(255,255,255,0.06);
-}
+.print-btn:hover { transform: scale(1.05); }
 
-/* 名称与元信息 */
-.name{margin:0;font-size:28px;letter-spacing:1px}
-.meta{margin-top:8px;color:var(--muted);display:flex;flex-direction:column;gap:6px;font-size:14px}
-
-/* 主体布局 */
-.resume-body{padding-top:18px}
-.section{margin-bottom:20px}
-.section h2{
-  margin:0 0 10px 0;
-  font-size:18px;
-  color:var(--text);
-  border-left:4px solid var(--accent);
-  padding-left:10px;
+/* 侧边栏 */
+.sidebar {
+    width: 33%;
+    background: #f8f9fa;
+    padding: 40px 30px;
+    border-right: 1px solid var(--border);
 }
 
-/* 工作经历 */
-.job{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
-.job-header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-.job h3{margin:0;font-size:16px}
-.job time{color:var(--muted);font-size:13px}
+.profile-img {
+    width: 140px; /* 约等于 35mm */
+    height: 180px; /* 约等于 45mm */
+    background: #eee;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+.profile-img img { width: 100%; height: 100%; object-fit: cover; }
 
-/* 列表样式 */
-ul{margin:8px 0 0 1rem;padding:0}
-ul li{margin:6px 0;color:var(--muted);font-size:14px}
-
-/* 技能 */
-.skills-list li{margin:8px 0;color:var(--muted)}
-
-/* 教育 */
-.edu-time{color:var(--muted);margin-top:6px}
-
-/* 页脚 */
-.site-footer{Padding:18px 0;border-top:1px solid rgba(255,255,255,0.02);text-align:center;color:var(--muted);font-size:13px}
-
-/* 下载按钮样式 */
-.download-actions{
-  margin-top:10px;
-  display:flex;
-  flex-direction:row;
-  justify-content:flex-end;
-  gap:8px;
-  align-items:center;
+/* 技能标签 */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 15px; }
+.tag {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 12px;
 }
 
-.download-btn,
-.download-link{
-  display:inline-block;
-  padding:6px 10px;
-  background:rgba(111,211,198,0.08);
-  color:var(--accent);
-  border:1px solid rgba(111,211,198,0.16);
-  border-radius:6px;
-  text-decoration:none;
-  font-size:13px;
-  cursor:pointer;
-  transition:all .12s ease;
+/* 主内容区 */
+.main-content {
+    flex: 1;
+    padding: 40px 45px;
 }
 
-.download-btn:hover,
-.download-link:hover{
-  background:rgba(111,211,198,0.14);
-  transform:translateY(-1px);
-  box-shadow:0 6px 14px rgba(0,0,0,0.28);
+.section-title {
+    font-size: 16px;
+    color: var(--google-blue);
+    border-bottom: 1px solid var(--border);
+    margin: 25px 0 15px;
+    text-transform: uppercase;
 }
 
-.download-btn:active{transform:translateY(0)}
+.item-header { display: flex; justify-content: space-between; font-size: 14px; }
+.date { color: var(--google-blue); font-family: 'Roboto Mono'; font-size: 12px; }
+.bullet-list { padding-left: 18px; margin-top: 8px; }
+.bullet-list li { font-size: 13px; color: var(--text-light); margin-bottom: 6px; }
 
-.download-pdf{
-  background:linear-gradient(180deg, rgba(111,211,198,0.14), rgba(111,211,198,0.06));
-  color:#042826;
-  border-color:rgba(111,211,198,0.26);
-}
-
-@media (max-width:720px){
-  .resume-header{flex-direction:column;align-items:center}
-  .resume-header .right{text-align:center;width:auto;margin-top:12px}
-  .download-actions{justify-content:center;flex-wrap:wrap}
+/* --- 核心：打印规则优化 --- */
+@media print {
+    body { background: white; padding: 0; }
+    .print-btn { display: none; } /* 打印时隐藏按钮 */
+    .resume-container {
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+    }
+    .sidebar { background: #f8f9fa !important; -webkit-print-color-adjust: exact; }
+    .tag { border: 1px solid #999 !important; }
 }
